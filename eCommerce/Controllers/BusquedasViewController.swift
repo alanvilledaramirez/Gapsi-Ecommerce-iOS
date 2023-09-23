@@ -74,7 +74,7 @@ class BusquedasViewController: UIViewController {
     
     func parseProductos(json: JSON){
         cargaDommies()
-        /*productos.removeAll()
+        /* productos.removeAll()
         productos.append(contentsOf: Producto.parseProductos(json: json["arreglo"].array))
         cargaMensaje()
         tableViewResultados.reloadData()*/
