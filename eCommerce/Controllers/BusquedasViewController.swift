@@ -88,6 +88,7 @@ class BusquedasViewController: UIViewController {
             present(alert, animated: true)
         }else{
             productos.removeAll()
+            cargaMensaje()
             tableViewResultados.reloadData()
             DispatchQueue.main.async {
                 self.requester.getProductosPorNombre(nombre: self.buscador.text!, code: 0)
