@@ -20,6 +20,7 @@ class Producto{
         self.imagen = imagen
     }
     init(json: JSON){
+        //Falta el parceo aiuudaa!!
         nombre = json["title"].stringValue
         precio = json["price"].stringValue
         imagen = json["image"].stringValue

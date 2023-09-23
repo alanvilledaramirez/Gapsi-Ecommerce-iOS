@@ -34,7 +34,6 @@ class BusquedasViewController: UIViewController {
         /*DispatchQueue.main.async {
          self.requester.getProductosPorNombre(nombre: "sony", code: 0)
          }*/
-        cargaDommies()
         cargaMensaje()
     }
     
@@ -50,6 +49,7 @@ class BusquedasViewController: UIViewController {
         productos.append(Producto(nombre: "Zapatos", precio: "$1,000", imagen: "https://images2.imgbox.com/94/f2/NN6Ph45r_o.png"))
         productos.append(Producto(nombre: "Zapatos", precio: "$1,000", imagen: "https://images2.imgbox.com/94/f2/NN6Ph45r_o.png"))
         tableViewResultados.reloadData()
+        cargaMensaje()
     }
     func cargaMensaje(){
         if productos.count > 0 {
@@ -73,10 +73,11 @@ class BusquedasViewController: UIViewController {
     }
     
     func parseProductos(json: JSON){
-        productos.removeAll()
+        cargaDommies()
+        /*productos.removeAll()
         productos.append(contentsOf: Producto.parseProductos(json: json["arreglo"].array))
         cargaMensaje()
-        tableViewResultados.reloadData()
+        tableViewResultados.reloadData()*/
     }
     
     @IBAction func buscar(_ sender: Any) {
@@ -89,9 +90,8 @@ class BusquedasViewController: UIViewController {
             productos.removeAll()
             tableViewResultados.reloadData()
             DispatchQueue.main.async {
-                //self.requester.getProductosPorNombre(nombre: self.buscador.text!, code: 0)
+                self.requester.getProductosPorNombre(nombre: self.buscador.text!, code: 0)
             }
-            cargaDommies()
             DBUtils.guardaBusquedas(busqueda: buscador.text!)
         }
     }
@@ -153,7 +153,8 @@ extension BusquedasViewController: RequesterDelegate {
     }
     
     func onFailureRequest(mensaje: String, code: Int) {
-        let alert = UIAlertController(title: "Gapsi", message: mensaje, preferredStyle: .alert)
+        cargaDommies()
+        let alert = UIAlertController(title: "Gapsi", message: mensaje+" (cargo dommies)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
         present(alert, animated: true)
     }
