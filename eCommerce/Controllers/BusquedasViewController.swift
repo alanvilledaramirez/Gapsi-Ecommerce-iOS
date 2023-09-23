@@ -15,6 +15,7 @@ class BusquedasViewController: UIViewController {
     @IBOutlet weak var constraintBusqueda: NSLayoutConstraint!
     @IBOutlet weak var mensaje: UILabel!
     @IBOutlet weak var buscador: UITextField!
+    @IBOutlet weak var mensaje2: UILabel!
     var busquedas = Array<String>()
     var requester: Requester!
     var productos = Array<Producto>()
@@ -57,17 +58,24 @@ class BusquedasViewController: UIViewController {
             mensaje.isHidden = false
         }
     }
+    func cargaMensaje2(){
+        if busquedas.count > 0 {
+            mensaje2.isHidden = true
+        }else{
+            mensaje2.isHidden = false
+        }
+    }
     func cargaBusquedas(){
         busquedas.removeAll()
         busquedas = DBUtils.getBusquedas()
         busquedas.reverse()
-        cargaMensaje()
         tableViewBusquedas.reloadData()
     }
     
     func parseProductos(json: JSON){
         productos.removeAll()
         productos.append(contentsOf: Producto.parseProductos(json: json["arreglo"].array))
+        cargaMensaje()
         tableViewResultados.reloadData()
     }
     
@@ -156,10 +164,12 @@ extension BusquedasViewController: RequesterDelegate {
 extension BusquedasViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         cargaBusquedas()
+        cargaMensaje2()
         tableViewBusquedas.isHidden = false
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         cargaBusquedas()
+        mensaje2.isHidden = true
         tableViewBusquedas.isHidden = true
     }
 }

@@ -425,6 +425,12 @@ ingresa un producto valido</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No hay busquedas recientes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9d-ep-B4L" userLabel="No hay informacion para mostrar, ingresa un producto valido">
+                                <rect key="frame" x="88.666666666666686" y="275" width="216" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1hf-9j-TsP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -434,6 +440,7 @@ ingresa un producto valido</string>
                             <constraint firstItem="wAY-Pc-vQB" firstAttribute="top" secondItem="ATr-Bh-XKe" secondAttribute="bottom" id="3bm-Fb-hRE"/>
                             <constraint firstItem="VoL-6f-JLh" firstAttribute="top" secondItem="DEM-ft-uVM" secondAttribute="bottom" constant="8" symbolic="YES" id="3dE-oP-ebY"/>
                             <constraint firstItem="VoL-6f-JLh" firstAttribute="centerX" secondItem="t95-6B-aOS" secondAttribute="centerX" id="78u-XI-9sH"/>
+                            <constraint firstItem="V9d-ep-B4L" firstAttribute="centerX" secondItem="VoL-6f-JLh" secondAttribute="centerX" id="7gt-qU-I0Q"/>
                             <constraint firstItem="1hf-9j-TsP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VoL-6f-JLh" secondAttribute="trailing" constant="16" id="CTB-as-21T"/>
                             <constraint firstItem="1hf-9j-TsP" firstAttribute="trailing" secondItem="K53-Ae-OHI" secondAttribute="trailing" constant="16" id="Gt0-Wh-Bnb"/>
                             <constraint firstItem="vyB-JB-XkX" firstAttribute="centerX" secondItem="K53-Ae-OHI" secondAttribute="centerX" id="KDi-3z-uMj"/>
@@ -444,6 +451,7 @@ ingresa un producto valido</string>
                             <constraint firstItem="ATr-Bh-XKe" firstAttribute="top" secondItem="t95-6B-aOS" secondAttribute="top" id="Uva-WJ-VTr"/>
                             <constraint firstItem="1hf-9j-TsP" firstAttribute="bottom" secondItem="K53-Ae-OHI" secondAttribute="bottom" constant="15" id="WNx-oH-rvW"/>
                             <constraint firstItem="1hf-9j-TsP" firstAttribute="top" secondItem="ATr-Bh-XKe" secondAttribute="bottom" id="WQg-cU-wQu"/>
+                            <constraint firstItem="V9d-ep-B4L" firstAttribute="centerY" secondItem="VoL-6f-JLh" secondAttribute="centerY" id="XfB-b1-zeg"/>
                             <constraint firstItem="ATr-Bh-XKe" firstAttribute="leading" secondItem="t95-6B-aOS" secondAttribute="leading" id="Xta-l5-5m9"/>
                             <constraint firstItem="DEM-ft-uVM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1hf-9j-TsP" secondAttribute="leading" constant="16" id="Zqw-x7-t58"/>
                             <constraint firstItem="wAY-Pc-vQB" firstAttribute="leading" secondItem="1hf-9j-TsP" secondAttribute="leading" id="aE3-oQ-Mg6"/>
@@ -462,6 +470,7 @@ ingresa un producto valido</string>
                         <outlet property="buscador" destination="kBp-xE-HkM" id="jis-hR-ShU"/>
                         <outlet property="constraintBusqueda" destination="eze-te-6BR" id="J4E-0b-XE9"/>
                         <outlet property="mensaje" destination="vyB-JB-XkX" id="GyT-Ag-24g"/>
+                        <outlet property="mensaje2" destination="V9d-ep-B4L" id="nbc-cg-w3a"/>
                         <outlet property="tableViewBusquedas" destination="VoL-6f-JLh" id="rTb-FM-I8r"/>
                         <outlet property="tableViewResultados" destination="K53-Ae-OHI" id="sXe-J8-umb"/>
                     </connections>
