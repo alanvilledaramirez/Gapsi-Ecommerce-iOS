@@ -32,7 +32,11 @@ class Requester {
         let headers = [
             "X-IBM-Client-Id":"adb8204d-d574-4394-8c1a-53226a40876e"
         ]
-        sendRequest(metodo: "search?&query=\(nombre)", httpMethod: .get, parametros: nil, headers: headers, code: code)
+        if let query = nombre.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            sendRequest(metodo: "search?&query=\(query)&page=1", httpMethod: .get, parametros: nil, headers: headers, code: code)
+        }else{
+            print("No se pudo hacer el encoding")
+        }
     }
     
     //Requester
@@ -67,7 +71,7 @@ class Requester {
     
     //Loaders
     func showLoader(completion: (() -> Void)?){
-        let alert = UIAlertController(title: "Gapsi", message: "Cargando...", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Gapsi", message: "Cargando, por favor espere...", preferredStyle: .alert)
         controller?.present(alert, animated: true, completion: completion)
     }
     

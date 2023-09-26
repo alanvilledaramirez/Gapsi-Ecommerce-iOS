@@ -12,10 +12,10 @@ class BusquedasViewController: UIViewController {
     
     @IBOutlet weak var tableViewBusquedas: UITableView!
     @IBOutlet weak var tableViewResultados: UITableView!
-    @IBOutlet weak var constraintBusqueda: NSLayoutConstraint!
     @IBOutlet weak var mensaje: UILabel!
     @IBOutlet weak var buscador: UITextField!
     @IBOutlet weak var mensaje2: UILabel!
+    @IBOutlet weak var vistaObscura: UIView!
     var busquedas = Array<String>()
     var requester: Requester!
     var productos = Array<Producto>()
@@ -32,7 +32,7 @@ class BusquedasViewController: UIViewController {
         tableViewBusquedas.isHidden = true
         
         /*DispatchQueue.main.async {
-         self.requester.getProductosPorNombre(nombre: "sony", code: 0)
+         self.requester.getProductosPorNombre(nombre: "", code: 0)
          }*/
         cargaMensaje()
     }
@@ -73,20 +73,27 @@ class BusquedasViewController: UIViewController {
     }
     
     func parseProductos(json: JSON){
-        cargaDommies()
-        /* productos.removeAll()
-        productos.append(contentsOf: Producto.parseProductos(json: json["arreglo"].array))
+        productos.removeAll()
+        let itemStack = json["item"]["props"]["pageProps"]["initialData"]["searchResult"]["itemStacks"].array
+        if itemStack != nil && itemStack!.count > 0 {
+            let items = itemStack![0]["items"].array
+            if items != nil && items!.count > 0 {
+                productos.append(contentsOf: Producto.parseProductos(json: items))
+            }
+        }
         cargaMensaje()
-        tableViewResultados.reloadData()*/
+        tableViewResultados.reloadData()
     }
     
     @IBAction func buscar(_ sender: Any) {
         self.view.endEditing(true)
-        if !buscador.hasText {
+        if !buscador.hasText || buscador.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+            buscador.text = ""
             let alert = UIAlertController(title: "Gapsi", message: "Ingresa un producto para continuar", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
             present(alert, animated: true)
         }else{
+            buscador.text = buscador.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             productos.removeAll()
             cargaMensaje()
             tableViewResultados.reloadData()
@@ -95,6 +102,10 @@ class BusquedasViewController: UIViewController {
             }
             DBUtils.guardaBusquedas(busqueda: buscador.text!)
         }
+    }
+    
+    @IBAction func tapOut(_ sender: Any) {
+        self.view.endEditing(true)
     }
 }
 
@@ -154,8 +165,7 @@ extension BusquedasViewController: RequesterDelegate {
     }
     
     func onFailureRequest(mensaje: String, code: Int) {
-        cargaDommies()
-        let alert = UIAlertController(title: "Gapsi", message: mensaje+" (cargo dommies)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Gapsi", message: mensaje, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: .cancel))
         present(alert, animated: true)
     }
@@ -168,10 +178,12 @@ extension BusquedasViewController: UITextFieldDelegate {
         cargaBusquedas()
         cargaMensaje2()
         tableViewBusquedas.isHidden = false
+        vistaObscura.isHidden = false
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         cargaBusquedas()
         mensaje2.isHidden = true
         tableViewBusquedas.isHidden = true
+        vistaObscura.isHidden = true
     }
 }
